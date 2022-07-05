@@ -57,5 +57,12 @@ const TextStyle inputText = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const TextStyle optionText = TextStyle(
+  fontSize: 14,
+  fontFamily: _primaryFont,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+
 
 

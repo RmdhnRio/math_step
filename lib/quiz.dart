@@ -5,6 +5,7 @@ import 'package:math_step/style.dart' as style;
 import 'main.dart' as m;
 import 'package:audioplayers/audioplayers.dart';
 import 'routes.dart' as route;
+import 'quiz_helper/quiz_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -448,10 +449,10 @@ class _QuizFormState extends State<QuizForm> {
                         padding: EdgeInsets.symmetric(vertical: 0, horizontal: 280),
                         child: ElevatedButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   route.QuizStartRoute(),
-                            // );
+                            Navigator.push(
+                              context,
+                              route.QuizStartRoute(),
+                            );
                           },
                           style:
                           ElevatedButton.styleFrom(
@@ -593,6 +594,7 @@ class _QuizFormState extends State<QuizForm> {
 }
 
 class _QuizStartState extends State<QuizStart> {
+  int _questionNumber = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -601,7 +603,7 @@ class _QuizStartState extends State<QuizStart> {
     return Scaffold(
 
       // resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
+     body: Container(
         child: Container(
           margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
 
@@ -639,76 +641,22 @@ class _QuizStartState extends State<QuizStart> {
                   Container(
                     alignment: Alignment.topCenter,
                     margin: const EdgeInsets.only(top: 40),
-                    child: Text(style: style.title, 'Siapa kamu?'),
+                    child: Text(style: style.title, 'Soal No.$_questionNumber' ),
                   ),
                 ],
               ),
 
-              Column(
+              Row(
+
                 children: <Widget>[
-                  Stack(
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(180, 0, 180, 0),
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(bottom: 10),
-                              child: Text(textAlign: TextAlign.center, style:style.quizText,'Isi “Nama” kamu dan “Kelas” kamu\ndi kotak isian dibawah ya!'),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: TextField(
-                                style: TextStyle(color: Colors.blueGrey[800]),
-                                decoration: InputDecoration(fillColor: Colors.blue[100], filled: true, labelText: 'Nama'),
-                              ),
+                  Column(
 
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.only(top: 10),
-                              child: TextField(
-                                style: TextStyle(color: Colors.blueGrey[800]),
-                                decoration: InputDecoration(fillColor: Colors.blue[100], filled: true, labelText: 'Kelas'),
-
-                              ),
-
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 220),
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 280),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              route.QuizStartRoute(),
-                            );
-                          },
-                          style:
-                          ElevatedButton.styleFrom(
-                            elevation: 3.0,
-                            // Foreground color
-                            onPrimary: Theme.of(context).colorScheme.onPrimary,
-                            // Background color
-                            primary: const Color.fromRGBO(156, 180, 236, 1),
-                          ),
-                          child:
-                          Container(
-                              alignment: Alignment.center,
-                              child: Text(style: style.btnText,'Lanjutkan')
-                          ),
-                        ),
-                      ),
+                    children: [
                       Container(
                         alignment: Alignment.bottomLeft,
-                        margin: const EdgeInsets.only(top: 120),
-                        padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                        padding: const EdgeInsets.fromLTRB(25, 120, 25, 0),
                         child: ElevatedButton(
+
                           onPressed: () async {
                             if(_isVolumeUp) {
                               await audioPlayer.pause();
@@ -737,6 +685,7 @@ class _QuizStartState extends State<QuizStart> {
                             // Background color
                             primary: const Color.fromRGBO(156, 180, 236, 1),
                           ),
+
                           child:
                           Container(
                               padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
@@ -750,70 +699,83 @@ class _QuizStartState extends State<QuizStart> {
                         ),
                       ),
                       Container(
-                        alignment: Alignment.bottomCenter,
-                        margin: const EdgeInsets.only(top: 205),
-                        padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                audioPlayer.stop();
-                                dispose();
-                              },
-                              style:
-                              ElevatedButton.styleFrom(
-                                elevation: 3.0,
-                                shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
-                                // Foreground color
-                                onPrimary: Theme.of(context).colorScheme.onPrimary,
-                                // Background color
-                                primary: const Color.fromRGBO(156, 180, 236, 1),
-                              ),
-                              child:
-                              Container(
-                                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                                height: 60,
-                                alignment: Alignment.center,
-                                child: const Icon(Icons.arrow_back, size: 18,),
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const m.MainMenu()),
-                                );
-                                audioPlayer.stop();
-                                dispose();
-                              },
-                              style:
-                              ElevatedButton.styleFrom(
-                                elevation: 3.0,
-                                shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
-                                // Foreground color
-                                onPrimary: Theme.of(context).colorScheme.onPrimary,
-                                // Background color
-                                primary: const Color.fromRGBO(156, 180, 236, 1),
-                              ),
-                              child:
-                              Container(
-                                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                                height: 60,
-                                alignment: Alignment.center,
-                                child: Icon(Icons.home, size: 18,),
-                              ),
-                            ),
-                          ],
+                        padding: EdgeInsets.only(top: 25),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            audioPlayer.stop();
+                            dispose();
+                          },
+                          style:
+                          ElevatedButton.styleFrom(
+                            elevation: 3.0,
+                            shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                            // Foreground color
+                            onPrimary: Theme.of(context).colorScheme.onPrimary,
+                            // Background color
+                            primary: const Color.fromRGBO(156, 180, 236, 1),
+                          ),
+                          child:
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                            height: 60,
+                            alignment: Alignment.center,
+                            child: const Icon(Icons.arrow_back, size: 18,),
+                          ),
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  Container(
+                    height: 250,
+                    width: 538,
+                    child: PageView.builder(
+                      itemCount: questions.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index){
+                        final _question = questions[index];
+                        return buildQuestion(_question);
+                      }
+                    ),
+                  ),
 
+                  Container(
+                    alignment: Alignment.bottomRight,
+                    padding: const EdgeInsets.fromLTRB(25, 205, 25, 0),
+                    child:
+
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const m.MainMenu()),
+                        );
+                        audioPlayer.stop();
+                        dispose();
+                      },
+                      style:
+                      ElevatedButton.styleFrom(
+                        elevation: 3.0,
+                        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                        // Foreground color
+                        onPrimary: Theme.of(context).colorScheme.onPrimary,
+                        // Background color
+                        primary: const Color.fromRGBO(156, 180, 236, 1),
+                      ),
+                      child:
+                      Container(
+                        height: 60,
+                        alignment: Alignment.center,
+                        child: Icon(Icons.home, size: 18,),
+                      ),
+                    ),
+
+                  ),
                 ],
+              )
 
-              ),
+
+
 
 
             ],
@@ -825,4 +787,78 @@ class _QuizStartState extends State<QuizStart> {
 
   }
 
+  Container buildQuestion(Question question) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            child: Text(textAlign: TextAlign.center, style:style.quizText, question.text),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            child: OptionsWidget(
+              question: question,
+            ),
+          )
+
+        ],
+      ),
+    );
+  }
+
+}
+
+class OptionsWidget extends StatelessWidget {
+  final Question question;
+
+  const OptionsWidget({
+    Key? key,
+    required this.question,
+  }) : super(key:key);
+
+  @override
+  Widget build(BuildContext context) => SingleChildScrollView(
+    child: Column(
+      children: question.options
+          .map((option) => buildOption(context, option))
+          .toList(),
+    ),
+  );
+
+  Widget buildOption(BuildContext context, Option option) {
+    return Container(
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+
+            },
+            style:
+            ElevatedButton.styleFrom(
+              elevation: 3.0,
+              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
+              // Foreground color
+              onPrimary: Theme.of(context).colorScheme.onPrimary,
+              // Background color
+              primary: const Color.fromRGBO(156, 180, 236, 1),
+            ),
+            child: Container(
+              height: 30,
+              width: 400,
+              padding: const EdgeInsets.fromLTRB(58,0,58,0),
+              alignment: Alignment.center,
+              child: Text(
+                option.text,
+                style: style.optionText,
+              ),
+            ),
+          ),
+
+        ],
+      ),
+    );
+  }
 }
