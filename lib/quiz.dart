@@ -17,7 +17,8 @@ Duration duration = Duration.zero;
 Duration position = Duration.zero;
 String _namaSiswa = "";
 String _kelas     = "";
-
+Color _color = const Color.fromRGBO(156, 180, 236, 1);
+int _index = 0;
 
 
 class MyApp extends StatelessWidget {
@@ -60,6 +61,11 @@ class QuizStart extends StatefulWidget {
   State<QuizStart> createState() => _QuizStartState();
 }
 
+class QuizResult extends StatefulWidget {
+  const QuizResult({Key? key}) : super(key: key);
+  @override
+  State<QuizResult> createState() => _QuizResultState();
+}
 
 class _QuizIntroState extends State<QuizIntro> {
 
@@ -80,6 +86,7 @@ class _QuizIntroState extends State<QuizIntro> {
   @override
   void initState() {
     super.initState();
+
 
     setAudio();
     // _isVolumeUp = true;
@@ -161,7 +168,7 @@ class _QuizIntroState extends State<QuizIntro> {
                         children: <Widget>[
                           Container(
                             alignment: Alignment.center,
-                            margin: EdgeInsets.only(top: 40),
+                            margin: const EdgeInsets.only(top: 40),
                             child:  SizedBox(
                               width: 450,
                               height: 140,
@@ -172,7 +179,7 @@ class _QuizIntroState extends State<QuizIntro> {
 
                                 ),
                                 child: Container(
-                                  padding: EdgeInsets.fromLTRB(15, 40, 15, 10),
+                                  padding: const EdgeInsets.fromLTRB(15, 40, 15, 10),
                                   child: Text(textAlign: TextAlign.center, style: style.quizCapt ,'Disini nanti kamu akan membaca pertanyaan\nkemudian menjawab jawaban yang menurut kamu paling benar'),
                                 ),
                                 ),
@@ -183,7 +190,7 @@ class _QuizIntroState extends State<QuizIntro> {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: 10),
+                      margin: const EdgeInsets.only(top: 10),
                       child:  SizedBox(
                         width: 80,
                         height: 80,
@@ -203,8 +210,8 @@ class _QuizIntroState extends State<QuizIntro> {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: 217),
-                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 280),
+                      margin: const EdgeInsets.only(top: 217),
+                      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 280),
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -325,7 +332,7 @@ class _QuizIntroState extends State<QuizIntro> {
                               padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                               height: 60,
                               alignment: Alignment.center,
-                              child: Icon(Icons.home, size: 18,),
+                              child: const Icon(Icons.home, size: 18,),
                             ),
                           ),
                         ],
@@ -410,7 +417,7 @@ class _QuizFormState extends State<QuizForm> {
                         child: Column(
                           children: <Widget>[
                             Container(
-                              margin: EdgeInsets.only(bottom: 10),
+                              margin: const EdgeInsets.only(bottom: 10),
                               child: Text(textAlign: TextAlign.center, style:style.quizText,'Isi “Nama” kamu dan “Kelas” kamu\ndi kotak isian dibawah ya!'),
                             ),
                             Container(
@@ -427,7 +434,7 @@ class _QuizFormState extends State<QuizForm> {
                             ),
                             Container(
                               alignment: Alignment.center,
-                              margin: EdgeInsets.only(top: 10),
+                              margin: const EdgeInsets.only(top: 10),
                               child: TextField(
                                 style: style.inputText,
                                 decoration: InputDecoration(
@@ -445,8 +452,8 @@ class _QuizFormState extends State<QuizForm> {
 
                       Container(
                         alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 220),
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 280),
+                        margin: const EdgeInsets.only(top: 220),
+                        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 280),
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -568,7 +575,7 @@ class _QuizFormState extends State<QuizForm> {
                                 padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                                 height: 60,
                                 alignment: Alignment.center,
-                                child: Icon(Icons.home, size: 18,),
+                                child: const Icon(Icons.home, size: 18,),
                               ),
                             ),
                           ],
@@ -594,7 +601,15 @@ class _QuizFormState extends State<QuizForm> {
 }
 
 class _QuizStartState extends State<QuizStart> {
+  late PageController _controller;
   int _questionNumber = 1;
+
+  @override
+  void initState(){
+    super.initState();
+    _controller = PageController(initialPage: 0);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -604,107 +619,38 @@ class _QuizStartState extends State<QuizStart> {
 
       // resizeToAvoidBottomInset: false,
      body: Container(
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+       margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
 
-          child: Column(
+       child: Column(
 
-            children: <Widget>[
-              Stack(
-                children: <Widget>[
-                  Row(children: <Widget>[
-                    Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(16, 30, 0, 0),
-                          child: const Image(
-                            image: AssetImage('assets/images/tut-wuri.png'),
-                            height: 56,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 30, 16, 0),
-                          child: const Image(
-                            image: AssetImage('assets/images/unj.png'),
-                            height: 56,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                  ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    margin: const EdgeInsets.only(top: 40),
-                    child: Text(style: style.title, 'Soal No.$_questionNumber' ),
-                  ),
-                ],
-              ),
-
-              Row(
-
-                children: <Widget>[
-                  Column(
-
-                    children: [
-                      Container(
-                        alignment: Alignment.bottomLeft,
-                        padding: const EdgeInsets.fromLTRB(25, 120, 25, 0),
-                        child: ElevatedButton(
-
-                          onPressed: () async {
-                            if(_isVolumeUp) {
-                              await audioPlayer.pause();
-                              if(mounted) {
-                                setState(() {
-                                  _isVolumeUp = false;
-                                });
-                              }
-                            } else {
-                              await audioPlayer.resume();
-                              if(mounted) {
-                                setState(() {
-                                  _isVolumeUp = true;
-                                });
-                              }
-                            }
-
-                          },
-                          style:
-                          ElevatedButton.styleFrom(
-                            elevation: 3.0,
-                            shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
-                            // Foreground color
-
-                            onPrimary: Theme.of(context).colorScheme.onPrimary,
-                            // Background color
-                            primary: const Color.fromRGBO(156, 180, 236, 1),
-                          ),
-
-                          child:
-                          Container(
-                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                              height: 60,
-                              width: 20,
-                              alignment: Alignment.center,
-                              child: _isVolumeUp?
-                              const Icon(Icons.volume_up, size: 18,) : const Icon(Icons.volume_off, size: 18,)
-
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 25),
-                        child: ElevatedButton(
+         children: <Widget>[
+           Column(
+             children: <Widget>[
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: <Widget>[
+                 Container(
+                   margin: const EdgeInsets.fromLTRB(16, 30, 0, 0),
+                   child: const Image(
+                     image: AssetImage('assets/images/tut-wuri.png'),
+                     height: 56,
+                   ),
+                 ),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                     children: [
+                       _questionNumber > 1 ?
+                       Container(
+                         margin: const EdgeInsets.fromLTRB(0,40,30,0),
+                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context);
-                            audioPlayer.stop();
-                            dispose();
+                            _controller.previousPage(
+                              duration: const Duration(milliseconds: 250),
+                              curve: Curves.easeInExpo,
+                            );
+                            setState((){
+                              _questionNumber--;
+                            });
                           },
                           style:
                           ElevatedButton.styleFrom(
@@ -715,106 +661,282 @@ class _QuizStartState extends State<QuizStart> {
                             // Background color
                             primary: const Color.fromRGBO(156, 180, 236, 1),
                           ),
-                          child:
-                          Container(
+                          child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                            height: 60,
+                            height: 15,
                             alignment: Alignment.center,
                             child: const Icon(Icons.arrow_back, size: 18,),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 250,
-                    width: 538,
-                    child: PageView.builder(
-                      itemCount: questions.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index){
-                        final _question = questions[index];
-                        return buildQuestion(_question);
-                      }
-                    ),
-                  ),
+                       )
+                       : Container(
+                         margin: const EdgeInsets.fromLTRB(0,40,95,0),
+                       ),
+                       Container(
+                         alignment: Alignment.topCenter,
+                         margin: const EdgeInsets.fromLTRB(0,40,30,0),
+                         child: Text(style: style.title, 'Soal No.$_questionNumber',),
+                       ),
+                       _questionNumber <= questions.length?
+                       Container(
+                         margin: const EdgeInsets.only(top: 40),
+                         child: ElevatedButton(
+                           onPressed: () {
+                            _controller.nextPage(
+                              duration: const Duration(milliseconds: 250),
+                              curve: Curves.easeInExpo,
+                            );
+                            setState((){
+                              _questionNumber++;
+                            });
+                           },
+                           style: ElevatedButton.styleFrom(
+                             elevation: 3.0,
+                             shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                             // Foreground color
+                             onPrimary: Theme.of(context).colorScheme.onPrimary,
+                             // Background color
+                             primary: const Color.fromRGBO(156, 180, 236, 1),
+                           ),
 
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    padding: const EdgeInsets.fromLTRB(25, 205, 25, 0),
-                    child:
+                           child: Container(
+                             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                             height: 15,
+                             alignment: Alignment.center,
+                             child: const Icon(Icons.arrow_forward, size: 18,),
+                           ),
+                         ),
+                       )
+                      : Container(
+                         margin: const EdgeInsets.only(top: 40),
+                         child: ElevatedButton(
+                           onPressed: () {
+                             Navigator.push(
+                               context,
+                               route.QuizResultRoute(),
+                             );
+                           },
+                           style: ElevatedButton.styleFrom(
+                             elevation: 3.0,
+                             shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                             // Foreground color
+                             onPrimary: Theme.of(context).colorScheme.onPrimary,
+                             // Background color
+                             primary: const Color.fromRGBO(156, 180, 236, 1),
+                           ),
 
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const m.MainMenu()),
-                        );
-                        audioPlayer.stop();
-                        dispose();
-                      },
-                      style:
-                      ElevatedButton.styleFrom(
-                        elevation: 3.0,
-                        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
-                        // Foreground color
-                        onPrimary: Theme.of(context).colorScheme.onPrimary,
-                        // Background color
-                        primary: const Color.fromRGBO(156, 180, 236, 1),
-                      ),
-                      child:
-                      Container(
-                        height: 60,
-                        alignment: Alignment.center,
-                        child: Icon(Icons.home, size: 18,),
-                      ),
-                    ),
+                           child: Container(
+                             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                             height: 15,
+                             alignment: Alignment.center,
+                             child: const Icon(Icons.arrow_forward, size: 18),
+                           ),
+                         ),
+                       )
+                     ],
+                   ),
 
-                  ),
-                ],
-              )
+                 Container(
+                   margin: const EdgeInsets.fromLTRB(0, 30, 16, 0),
+                   child: const Image(
+                     image: AssetImage('assets/images/unj.png'),
+                     height: 56,
+                   ),
+                 ),
+               ],
+               ),
 
+             ],
+           ),
 
+           Row(
 
+             children: <Widget>[
+               Column(
 
+                 children: [
+                   Container(
+                     alignment: Alignment.bottomLeft,
+                     padding: const EdgeInsets.fromLTRB(25, 120, 25, 0),
+                     child: ElevatedButton(
 
-            ],
-          ),
-        ),
-      ),
+                       onPressed: () async {
+                         if(_isVolumeUp) {
+                           await audioPlayer.pause();
+                           if(mounted) {
+                             setState(() {
+                               _isVolumeUp = false;
+                             });
+                           }
+                         } else {
+                           await audioPlayer.resume();
+                           if(mounted) {
+                             setState(() {
+                               _isVolumeUp = true;
+                             });
+                           }
+                         }
+
+                       },
+                       style:
+                       ElevatedButton.styleFrom(
+                         elevation: 3.0,
+                         shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                         // Foreground color
+
+                         onPrimary: Theme.of(context).colorScheme.onPrimary,
+                         // Background color
+                         primary: const Color.fromRGBO(156, 180, 236, 1),
+                       ),
+
+                       child:
+                       Container(
+                           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                           height: 60,
+                           width: 20,
+                           alignment: Alignment.center,
+                           child: _isVolumeUp?
+                           const Icon(Icons.volume_up, size: 18,) : const Icon(Icons.volume_off, size: 18,)
+
+                       ),
+                     ),
+                   ),
+                   Container(
+                     padding: const EdgeInsets.only(top: 25),
+                     child: ElevatedButton(
+                       onPressed: () {
+                         Navigator.pop(context);
+                         audioPlayer.stop();
+                         dispose();
+                       },
+                       style:
+                       ElevatedButton.styleFrom(
+                         elevation: 3.0,
+                         shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                         // Foreground color
+                         onPrimary: Theme.of(context).colorScheme.onPrimary,
+                         // Background color
+                         primary: const Color.fromRGBO(156, 180, 236, 1),
+                       ),
+                       child:
+                       Container(
+                         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                         height: 60,
+                         alignment: Alignment.center,
+                         child: const Icon(Icons.arrow_back, size: 18,),
+                       ),
+                     ),
+                   ),
+                 ],
+               ),
+               SizedBox(
+                 height: 250,
+                 width: 538,
+                 child: PageView.builder(
+                   itemCount: questions.length,
+                   controller: _controller,
+                   physics: const NeverScrollableScrollPhysics(),
+                   itemBuilder: (context, index){
+
+                     final question = questions[index];
+                     return buildQuestion(question);
+                   }
+                 ),
+               ),
+
+               Container(
+                 alignment: Alignment.bottomRight,
+                 padding: const EdgeInsets.fromLTRB(25, 205, 25, 0),
+                 child:
+
+                 ElevatedButton(
+                   onPressed: () {
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(builder: (context) => const m.MainMenu()),
+                     );
+                     audioPlayer.stop();
+                     dispose();
+                   },
+                   style:
+                   ElevatedButton.styleFrom(
+                     elevation: 3.0,
+                     shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                     // Foreground color
+                     onPrimary: Theme.of(context).colorScheme.onPrimary,
+                     // Background color
+                     primary: const Color.fromRGBO(156, 180, 236, 1),
+                   ),
+                   child:
+                   Container(
+                     height: 60,
+                     alignment: Alignment.center,
+                     child: const Icon(Icons.home, size: 18,),
+                   ),
+                 ),
+
+               ),
+             ],
+           )
+         ],
+       ),
+     ),
 
     );
 
   }
 
-  Container buildQuestion(Question question) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            child: Text(textAlign: TextAlign.center, style:style.quizText, question.text),
+  Column buildQuestion(Question question) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 30,
+          margin: const EdgeInsets.only(bottom: 10),
+          child: Text(textAlign: TextAlign.center, style:style.quizText, question.text),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: OptionsWidget(
+            question: question,
+            onClickedOption: (option) {
+              if (question.isLocked) {
+                return;
+              } else {
+                setState((){
+                  question.isLocked = true;
+                  question.selectedOption = option;
+                });
+              }
+            },
           ),
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            child: OptionsWidget(
-              question: question,
-            ),
-          )
-
-        ],
-      ),
+        ),
+      ],
     );
   }
 
 }
 
+class _QuizResultState extends State<QuizResult> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container();
+  }
+
+}
+
+
+
+
+
 class OptionsWidget extends StatelessWidget {
   final Question question;
+  final ValueChanged<Option> onClickedOption;
 
   const OptionsWidget({
     Key? key,
     required this.question,
+    required this.onClickedOption,
   }) : super(key:key);
 
   @override
@@ -827,23 +949,30 @@ class OptionsWidget extends StatelessWidget {
   );
 
   Widget buildOption(BuildContext context, Option option) {
-    return Container(
+
+    _color = getColorForOption(option, question);
+    return SizedBox(
       height: 50,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-            onPressed: () {
-
+            onPressed: (){
+              onClickedOption(option);
+              // _index++;
             },
             style:
             ElevatedButton.styleFrom(
               elevation: 3.0,
-              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
+              // side: const BorderSide(width: 2.0, color: Colors.white54),
+              shape: RoundedRectangleBorder(
+                  borderRadius:BorderRadius.circular(20.0)
+              ),
+
               // Foreground color
               onPrimary: Theme.of(context).colorScheme.onPrimary,
               // Background color
-              primary: const Color.fromRGBO(156, 180, 236, 1),
+              primary: _color
             ),
             child: Container(
               height: 30,
@@ -856,9 +985,21 @@ class OptionsWidget extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );
+  }
+
+  Color getColorForOption(Option option, Question question) {
+    final isSelected = option == question.selectedOption;
+    if (question.isLocked) {
+      if (isSelected) {
+        return option.isCorrect ? Colors.greenAccent
+            : Colors.red;
+      } else if (option.isCorrect) {
+        return Colors.greenAccent;
+      }
+    }
+    return const Color.fromRGBO(156, 180, 236, 1);
   }
 }

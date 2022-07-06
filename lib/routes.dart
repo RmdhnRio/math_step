@@ -128,5 +128,20 @@ Route QuizStartRoute() {
   );
 }
 
+Route QuizResultRoute() {
+  return PageRouteBuilder(
+    transitionDuration: const Duration(milliseconds: 800),
+    pageBuilder: (context, animation, secodaryAnimation) => const QuizResult(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+      return SlideTransition(
+        position: animation.drive(_tween),
+        child: child,
+      );
+    }
+  );
+
+}
+
 
 

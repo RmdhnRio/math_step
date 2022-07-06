@@ -26,7 +26,7 @@ class Option{
 
 final questions = [
   Question(
-      text: 'Siapa yang sebenarnya disukai oleh si A', 
+      text: 'Siapa yang sebenarnya disukai oleh si A ?',
       options: [
         const Option(text: 'Si B', isCorrect: false, score: 0),
         const Option(text: 'Si C', isCorrect: true, score: 10),
@@ -37,7 +37,7 @@ final questions = [
   ),
 
   Question(
-      text: 'Mengapa si A menyukai orang tersebut',
+      text: 'Mengapa si A menyukai orang tersebut ?',
       options: [
         const Option(text: 'Karena dia effort', isCorrect: false, score: 0),
         const Option(text: 'Karena punya aerox', isCorrect: true, score: 10),
@@ -57,5 +57,25 @@ final questions = [
 
       ]
   ),
+
+  Question(
+    text: 'Dimana naskah SUPERSEMAR yang asli di simpan ?',
+    options: [
+      const Option(text: 'Di meja belajar andi', isCorrect: false, score: 0),
+      const Option(text: 'Di laci meja presiden', isCorrect: false, score: 0),
+      const Option(text: 'Di museum nasional', isCorrect: false, score: 0),
+      const Option(text: 'Tidak tahu', isCorrect: true, score: 0),
+    ]
+  ),
+
+  Question(
+    text: 'Siapa dalang pembunuhan Munir ?',
+    options: [
+      const Option(text: 'Tidak tahu', isCorrect: false, score: 0),
+      const Option(text: 'Tanya Rezim', isCorrect: false, score: 0),
+      const Option(text: 'Tanya Polisi', isCorrect: false, score: 0),
+      const Option(text: 'Saya ditangkap,tolong', isCorrect: true, score: 10),
+    ]
+  )
   
 ];
