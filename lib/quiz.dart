@@ -162,7 +162,8 @@ class _QuizIntroState extends State<QuizIntro> {
                 Stack(
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.fromLTRB(90, 10, 90, 0),
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: Stack(
 
                         children: <Widget>[
@@ -357,6 +358,18 @@ class _QuizIntroState extends State<QuizIntro> {
 
 class _QuizFormState extends State<QuizForm> {
 
+  final _formKey = GlobalKey<FormState>();
+  final namaController = TextEditingController();
+  final kelasController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    namaController.dispose();
+    kelasController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -414,52 +427,85 @@ class _QuizFormState extends State<QuizForm> {
                     children: <Widget>[
                       Container(
                         padding: const EdgeInsets.fromLTRB(180, 0, 180, 0),
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              margin: const EdgeInsets.only(bottom: 10),
-                              child: Text(textAlign: TextAlign.center, style:style.quizText,'Isi “Nama” kamu dan “Kelas” kamu\ndi kotak isian dibawah ya!'),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: TextField(
-                                style: style.inputText,
-                                decoration: InputDecoration(
-                                  fillColor: Colors.blue[50],
-                                  // focusColor: Colors.blue[100],
-                                  filled: true,
-                                  labelText: 'Nama'),
+                        child:
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 10),
+                                child: Text(textAlign: TextAlign.center, style:style.quizText,'Isi “Nama” kamu dan “Kelas” kamu\ndi kotak isian dibawah ya!'),
                               ),
+                              Container(
+                                height: 75,
+                                alignment: Alignment.center,
+                                child: TextFormField(
+                                  style: style.inputText,
+                                  decoration: InputDecoration(
+                                      fillColor: Colors.blue[50],
+                                      // focusColor: Colors.blue[100],
+                                      filled: true,
+                                      labelText: 'Nama'
+                                  ),
+                                  controller: namaController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty){
+                                      return 'Harap isi kolom "Nama" dahulu ya!';
+                                    }
+                                    return null;
+                                  }
+                                ),
 
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(top: 10),
-                              child: TextField(
-                                style: style.inputText,
-                                decoration: InputDecoration(
-                                  fillColor: Colors.blue[50],
-
-                                  // focusColor: Colors.blue[100],
-                                  filled: true,
-                                  labelText: 'Kelas'),
                               ),
+                              Container(
+                                height: 75,
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.only(top: 10),
+                                child: TextFormField(
 
-                            ),
-                          ],
+                                  style: style.inputText,
+                                  decoration: InputDecoration(
+                                      fillColor: Colors.blue[50],
+
+                                      // focusColor: Colors.blue[100],
+                                      filled: true,
+                                      labelText: 'Kelas'
+                                  ),
+                                  controller: kelasController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Harap isi kolom "Kelas" juga yaa!';
+                                    }
+                                    return null;
+                                  },
+                                ),
+
+                              ),
+                            ],
+                          ),
                         ),
+
                       ),
 
                       Container(
                         alignment: Alignment.center,
-                        margin: const EdgeInsets.only(top: 220),
+                        margin: const EdgeInsets.only(top: 222),
                         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 280),
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              route.QuizStartRoute(),
-                            );
+                            if(_formKey.currentState!.validate()){
+                              Navigator.push(
+                                context,
+                                route.QuizStartRoute(),
+
+                              );
+                              _namaSiswa == namaController.text;
+                              _kelas == kelasController.text;
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Oops.. harap lengkapi form terlebih dahulu!'))
+                              );
+                            }
                           },
                           style:
                           ElevatedButton.styleFrom(
@@ -918,9 +964,171 @@ class _QuizStartState extends State<QuizStart> {
 
 class _QuizResultState extends State<QuizResult> {
   @override
+  void initState(){
+    super.initState();
+    audioPlayer.stop();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container();
+    return Scaffold(
+
+      body: Container(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+
+        child: Column(
+
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Row(children: <Widget>[
+                  Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(16, 30, 0, 0),
+                        child: const Image(
+                          image: AssetImage('assets/images/tut-wuri.png'),
+                          height: 56,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 30, 16, 0),
+                        child: const Image(
+                          image: AssetImage('assets/images/unj.png'),
+                          height: 56,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+                ),
+                Container(
+                  alignment: Alignment.topCenter,
+                  margin: const EdgeInsets.only(top: 40),
+                  child: Text(style: style.title, 'Hasil'),
+                ),
+              ],
+            ),
+
+            Column(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: Text('Skor yang kamu dapatkan adalah :',style: style.resultText,),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      alignment: Alignment.center,
+                      child: Text('10/10', style: style.resultPoint,),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(top: 217),
+                      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 280),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            route.QuizStartRoute(),
+                          );
+                        },
+                        style:
+                        ElevatedButton.styleFrom(
+                          elevation: 3.0,
+                          // Foreground color
+                          onPrimary: Theme.of(context).colorScheme.onPrimary,
+                          // Background color
+                          primary: const Color.fromRGBO(156, 180, 236, 1),
+                        ),
+                        child:
+                        Container(
+                            alignment: Alignment.center,
+                            child: Text(style: style.btnText,'Lihat Pembahasan')
+                        ),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      margin: const EdgeInsets.only(top: 205),
+                      padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              audioPlayer.stop();
+                              dispose();
+                            },
+                            style:
+                            ElevatedButton.styleFrom(
+                              elevation: 3.0,
+                              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                              // Foreground color
+                              onPrimary: Theme.of(context).colorScheme.onPrimary,
+                              // Background color
+                              primary: const Color.fromRGBO(156, 180, 236, 1),
+                            ),
+                            child:
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                              height: 60,
+                              alignment: Alignment.center,
+                              child: const Icon(Icons.arrow_back, size: 18,),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const m.MainMenu()),
+                              );
+                              audioPlayer.stop();
+                              dispose();
+                            },
+                            style:
+                            ElevatedButton.styleFrom(
+                              elevation: 3.0,
+                              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                              // Foreground color
+                              onPrimary: Theme.of(context).colorScheme.onPrimary,
+                              // Background color
+                              primary: const Color.fromRGBO(156, 180, 236, 1),
+                            ),
+                            child:
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                              height: 60,
+                              alignment: Alignment.center,
+                              child: const Icon(Icons.home, size: 18,),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+
+              ],
+
+            ),
+
+
+          ],
+        ),
+      ),
+
+    );
   }
 
 }
