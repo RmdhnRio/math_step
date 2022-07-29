@@ -19,6 +19,7 @@ String _namaSiswa = "";
 String _kelas     = "";
 Color _color = const Color.fromRGBO(156, 180, 236, 1);
 int _index = 0;
+int _score = 0;
 
 
 class MyApp extends StatelessWidget {
@@ -462,7 +463,10 @@ class _QuizFormState extends State<QuizForm> {
                                 alignment: Alignment.center,
                                 margin: const EdgeInsets.only(top: 10),
                                 child: TextFormField(
-
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   style: style.inputText,
                                   decoration: InputDecoration(
                                       fillColor: Colors.blue[50],
@@ -497,7 +501,6 @@ class _QuizFormState extends State<QuizForm> {
                               Navigator.push(
                                 context,
                                 route.QuizStartRoute(),
-
                               );
                               _namaSiswa == namaController.text;
                               _kelas == kelasController.text;
@@ -650,6 +653,8 @@ class _QuizStartState extends State<QuizStart> {
   late PageController _controller;
   int _questionNumber = 1;
 
+  bool _islocked = false;
+
   @override
   void initState(){
     super.initState();
@@ -696,6 +701,7 @@ class _QuizStartState extends State<QuizStart> {
                             );
                             setState((){
                               _questionNumber--;
+                              _islocked = true;
                             });
                           },
                           style:
@@ -723,7 +729,7 @@ class _QuizStartState extends State<QuizStart> {
                          margin: const EdgeInsets.fromLTRB(0,40,30,0),
                          child: Text(style: style.title, 'Soal No.$_questionNumber',),
                        ),
-                       _questionNumber <= questions.length?
+                       _questionNumber < questions.length?
                        Container(
                          margin: const EdgeInsets.only(top: 40),
                          child: ElevatedButton(
@@ -734,6 +740,7 @@ class _QuizStartState extends State<QuizStart> {
                             );
                             setState((){
                               _questionNumber++;
+                              _islocked = false;
                             });
                            },
                            style: ElevatedButton.styleFrom(
@@ -920,7 +927,6 @@ class _QuizStartState extends State<QuizStart> {
                      child: const Icon(Icons.home, size: 18,),
                    ),
                  ),
-
                ),
              ],
            )
@@ -952,6 +958,10 @@ class _QuizStartState extends State<QuizStart> {
                   question.isLocked = true;
                   question.selectedOption = option;
                 });
+                _islocked = question.isLocked;
+                if(question.selectedOption!.isCorrect){
+                  _score += option.score;
+                }
               }
             },
           ),
@@ -1029,7 +1039,7 @@ class _QuizResultState extends State<QuizResult> {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       alignment: Alignment.center,
-                      child: Text('10/10', style: style.resultPoint,),
+                      child: Text('$_score/100', style: style.resultPoint,),
                     ),
                     Container(
                       alignment: Alignment.center,
@@ -1064,29 +1074,31 @@ class _QuizResultState extends State<QuizResult> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              audioPlayer.stop();
-                              dispose();
-                            },
-                            style:
-                            ElevatedButton.styleFrom(
-                              elevation: 3.0,
-                              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
-                              // Foreground color
-                              onPrimary: Theme.of(context).colorScheme.onPrimary,
-                              // Background color
-                              primary: const Color.fromRGBO(156, 180, 236, 1),
-                            ),
-                            child:
-                            Container(
-                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                              height: 60,
-                              alignment: Alignment.center,
-                              child: const Icon(Icons.arrow_back, size: 18,),
-                            ),
-                          ),
+
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     Navigator.pop(context);
+                          //     audioPlayer.stop();
+                          //     dispose();
+                          //   },
+                          //   style:
+                          //   ElevatedButton.styleFrom(
+                          //     elevation: 3.0,
+                          //     shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                          //     // Foreground color
+                          //     onPrimary: Theme.of(context).colorScheme.onPrimary,
+                          //     // Background color
+                          //     primary: const Color.fromRGBO(156, 180, 236, 1),
+                          //   ),
+                          //   child:
+                          //   Container(
+                          //     padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                          //     height: 60,
+                          //     alignment: Alignment.center,
+                          //     child: const Icon(Icons.arrow_back, size: 18,),
+                          //   ),
+                          // ),
+                          Spacer(),
                           ElevatedButton(
                             onPressed: () {
                               Navigator.push(
@@ -1167,7 +1179,6 @@ class OptionsWidget extends StatelessWidget {
           ElevatedButton(
             onPressed: (){
               onClickedOption(option);
-              // _index++;
             },
             style:
             ElevatedButton.styleFrom(

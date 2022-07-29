@@ -215,9 +215,9 @@ class _MainMenu extends State<MainMenu> {
                   margin: EdgeInsets.only(top: 30),
                   padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-
+                      SizedBox(width: 45,),
                       ElevatedButton(
                         onPressed: () {
                           // Navigator.push(
@@ -290,30 +290,31 @@ class _MainMenu extends State<MainMenu> {
                           alignment: Alignment.center,
                           child: Text(textAlign: TextAlign.center,style: style.menuText,'Materi'), ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            route.videoRoute(),
-                          );
-                        },
-                        style:
-                        ElevatedButton.styleFrom(
-                          elevation: 3.0,
-                          shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0)),
-                          // Foreground color
-                          onPrimary: Theme.of(context).colorScheme.onPrimary,
-                          // Background color
-                          primary: const Color.fromRGBO(156, 180, 236, 1),
-                        ),
-                        child:
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                          height: 80,
-                          width: 140,
-                          alignment: Alignment.center,
-                          child: Text(textAlign: TextAlign.center,style: style.menuText,'Video \Pembelajaran'), ),
-                      ),
+                      SizedBox(width: 45,),
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       route.videoRoute(),
+                      //     );
+                      //   },
+                      //   style:
+                      //   ElevatedButton.styleFrom(
+                      //     elevation: 3.0,
+                      //     shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0)),
+                      //     // Foreground color
+                      //     onPrimary: Theme.of(context).colorScheme.onPrimary,
+                      //     // Background color
+                      //     primary: const Color.fromRGBO(156, 180, 236, 1),
+                      //   ),
+                      //   child:
+                      //   Container(
+                      //     padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                      //     height: 80,
+                      //     width: 140,
+                      //     alignment: Alignment.center,
+                      //     child: Text(textAlign: TextAlign.center,style: style.menuText,'Video \Pembelajaran'), ),
+                      // ),
 
 
                     ],
