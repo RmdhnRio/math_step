@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:video_player/video_player.dart';
+// import 'package:video_player/video_player.dart';
 import 'style.dart' as style;
 import 'kompetensi.dart' as komp;
 import 'tentang.dart' as ten;
@@ -371,14 +371,14 @@ class _MainMenu extends State<MainMenu> {
                               height: 80,
                               width: 140,
                               alignment: Alignment.center,
-                              child: Text(textAlign: TextAlign.center,style: style.menuText,'Profil'), ),
+                              child: Text(textAlign: TextAlign.center,style: style.menuText,'Profil Pengembang'), ),
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   route.ProfileRoute(),
-                              // );
+                              Navigator.push(
+                                context,
+                                route.DaftarPustakaRoute(),
+                              );
                             },
                             style:
                             ElevatedButton.styleFrom(

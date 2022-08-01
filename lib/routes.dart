@@ -172,6 +172,21 @@ Route ProfileRoute() {
   );
 }
 
+Route DaftarPustakaRoute() {
+  return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 800),
+      pageBuilder: (context, animation, secondaryAnimation) => const DaftarPustaka(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+        return SlideTransition(
+          position: animation.drive(_tween),
+          child: child,
+        );
+      }
+  );
+}
+
+
 
 
 

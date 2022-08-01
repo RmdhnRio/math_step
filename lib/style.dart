@@ -52,6 +52,18 @@ const TextStyle quizText = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const TextStyle tp = TextStyle(
+  fontSize: 20,
+  fontFamily: _primaryFont,
+  color: _primaryColor,
+);
+
+const TextStyle dp = TextStyle(
+  fontSize: 19,
+  fontFamily: _primaryFont,
+  color: _primaryColor
+);
+
 const TextStyle inputText = TextStyle(
   fontSize: 16,
   fontFamily: _primaryFont,

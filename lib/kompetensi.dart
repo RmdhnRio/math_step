@@ -255,8 +255,8 @@ class _KompetensiDasar extends State<KompetensiDasar>{
     double _screenWidth = MediaQuery.of(context).size.width;
     double _screenHeight = MediaQuery.of(context).size.height;
 
-    final pdfController = PdfController(
-      document: PdfDocument.openAsset('assets/documents/kompetensi_dasar.pdf'),
+    final pdfController = PdfControllerPinch(
+      document: PdfDocument.openAsset('assets/documents/KD_KI_Indikator.pdf'),
 
 
     );
@@ -303,7 +303,7 @@ class _KompetensiDasar extends State<KompetensiDasar>{
                 Container(
                   alignment: Alignment.topCenter,
                   margin: const EdgeInsets.only(top: 40),
-                  child: Text(style: style.title, 'Kompetensi Dasar'),
+                  child: Text(style: style.title, 'KI, KD dan Indikator'),
                 ),
               ],
             ),
@@ -320,15 +320,14 @@ class _KompetensiDasar extends State<KompetensiDasar>{
                           Container(
                             margin: EdgeInsets.only(top: 10),
                             child:  SizedBox(
-                              width: 434,
+                              width: 490,
                               height: 244,
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
-                                  color: const Color.fromRGBO(237, 194, 59, 1),
                                   // borderRadius: BorderRadius.circular(16.0),
 
                                 ),
-                                child: PdfView(
+                                child: PdfViewPinch(
                                   controller: pdfController,
                                   scrollDirection: Axis.horizontal,
                                 ),
@@ -424,7 +423,7 @@ class _TujuanPembelajaran extends State<TujuanPembelajaran>{
     double _screenHeight = MediaQuery.of(context).size.height;
 
     final pdfController = PdfController(
-      document: PdfDocument.openAsset('assets/documents/kompetensi_dasar.pdf'),
+      document: PdfDocument.openAsset('assets/documents/Tujuan_Pembelajaran.pdf'),
 
 
     );
@@ -481,25 +480,24 @@ class _TujuanPembelajaran extends State<TujuanPembelajaran>{
                 Stack(
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.fromLTRB(90, 10, 90, 0),
-                      child: Row(
+                      padding: const EdgeInsets.fromLTRB(120, 10, 120, 0),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.only(top: 10),
-                            child:  SizedBox(
-                              width: 434,
-                              height: 244,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: const Color.fromRGBO(237, 194, 59, 1),
-                                  // borderRadius: BorderRadius.circular(16.0),
-
-                                ),
-                                child: PdfView(
-                                  controller: pdfController,
-                                  scrollDirection: Axis.horizontal,
-                                ),
+                            child: Text('(Fokus ke Satuan Volume)', style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Nunito', fontSize: 20)),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child:  RichText(
+                              textAlign: TextAlign.left,
+                              text: TextSpan(
+                                style: style.tp,
+                                children: <TextSpan>[
+                                  TextSpan(text: '1. Dengan menggunakan media pembelajaran interaktif, peserta didik dapat menentukan volume bangun ruang. \n\n'),
+                                  TextSpan(text: '2. Dengan menggunakan media pembelajaran interaktif, peserta didik dapat menyelesaikan permasalahan sehari-hari yang berkaitan dengan satuan volumedengan benar. \n'),
+                                ],
                               ),
                             ),
                           ),

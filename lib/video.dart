@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'main.dart' as m;
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
-import 'package:better_player/better_player.dart';
 
 
 
