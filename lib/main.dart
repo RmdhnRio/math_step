@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 304,
 
             ),
-            Text(style: style.title, 'Media Interaktif'),
+            Text(textAlign: TextAlign.center,style: style.title, 'Media Pembelajaran \n Interaktif'),
             Align(
               alignment: Alignment.bottomCenter,
                 child:
@@ -203,7 +203,7 @@ class _MainMenu extends State<MainMenu> {
                 Container(
                   alignment: Alignment.topCenter,
                   margin: EdgeInsets.only(top: 40),
-                  child: Text(style: style.title, 'Pilih Menu'),
+                  child: Text(style: style.title, 'Menu'),
                 ),
               ],
             ),
@@ -217,7 +217,7 @@ class _MainMenu extends State<MainMenu> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      SizedBox(width: 45,),
+                      // SizedBox(width: 45,),
                       ElevatedButton(
                         onPressed: () {
                           // Navigator.push(
@@ -290,33 +290,31 @@ class _MainMenu extends State<MainMenu> {
                           alignment: Alignment.center,
                           child: Text(textAlign: TextAlign.center,style: style.menuText,'Materi'), ),
                       ),
-                      SizedBox(width: 45,),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     Navigator.push(
-                      //       context,
-                      //       route.videoRoute(),
-                      //     );
-                      //   },
-                      //   style:
-                      //   ElevatedButton.styleFrom(
-                      //     elevation: 3.0,
-                      //     shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0)),
-                      //     // Foreground color
-                      //     onPrimary: Theme.of(context).colorScheme.onPrimary,
-                      //     // Background color
-                      //     primary: const Color.fromRGBO(156, 180, 236, 1),
-                      //   ),
-                      //   child:
-                      //   Container(
-                      //     padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                      //     height: 80,
-                      //     width: 140,
-                      //     alignment: Alignment.center,
-                      //     child: Text(textAlign: TextAlign.center,style: style.menuText,'Video \Pembelajaran'), ),
-                      // ),
-
-
+                      // SizedBox(width: 45,),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            route.MariMencobaRoute(),
+                          );
+                        },
+                        style:
+                        ElevatedButton.styleFrom(
+                          elevation: 3.0,
+                          shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                          // Foreground color
+                          onPrimary: Theme.of(context).colorScheme.onPrimary,
+                          // Background color
+                          primary: const Color.fromRGBO(156, 180, 236, 1),
+                        ),
+                        child:
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                          height: 80,
+                          width: 140,
+                          alignment: Alignment.center,
+                          child: Text(textAlign: TextAlign.center,style: style.menuText,'Mari Mencoba'), ),
+                      ),
                     ],
                   ),
                 ),
@@ -327,30 +325,6 @@ class _MainMenu extends State<MainMenu> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          ElevatedButton(
-                            onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(builder: (context) => const MainMenu()),
-                              // );
-                            },
-                            style:
-                            ElevatedButton.styleFrom(
-                              elevation: 3.0,
-                              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
-                              // Foreground color
-                              onPrimary: Theme.of(context).colorScheme.onPrimary,
-                              // Background color
-                              primary: const Color.fromRGBO(156, 180, 236, 1),
-                            ),
-                            child:
-                            Container(
-                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                              height: 80,
-                              width: 140,
-                              alignment: Alignment.center,
-                              child: Text(textAlign: TextAlign.center,style: style.menuText,'Mari Mencoba'), ),
-                          ),
                           ElevatedButton(
                             onPressed: () {
                               Navigator.push(
@@ -379,7 +353,7 @@ class _MainMenu extends State<MainMenu> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                route.tentangRoute(),
+                                route.ProfileRoute(),
                               );
                             },
                             style:
@@ -397,7 +371,31 @@ class _MainMenu extends State<MainMenu> {
                               height: 80,
                               width: 140,
                               alignment: Alignment.center,
-                              child: Text(textAlign: TextAlign.center,style: style.menuText,'Tentang'), ),
+                              child: Text(textAlign: TextAlign.center,style: style.menuText,'Profil'), ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   route.ProfileRoute(),
+                              // );
+                            },
+                            style:
+                            ElevatedButton.styleFrom(
+                              elevation: 3.0,
+                              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0)),
+                              // Foreground color
+                              onPrimary: Theme.of(context).colorScheme.onPrimary,
+                              // Background color
+                              primary: const Color.fromRGBO(156, 180, 236, 1),
+                            ),
+                            child:
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                              height: 80,
+                              width: 140,
+                              alignment: Alignment.center,
+                              child: Text(textAlign: TextAlign.center,style: style.menuText,'Daftar Pustaka'), ),
                           ),
 
 

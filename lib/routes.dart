@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_step/essay.dart';
 import 'package:math_step/quiz.dart';
 import 'main.dart';
 import 'materi.dart';
@@ -142,6 +143,36 @@ Route QuizResultRoute() {
   );
 
 }
+
+Route MariMencobaRoute() {
+  return PageRouteBuilder(
+    transitionDuration: const Duration(milliseconds: 800),
+    pageBuilder: (context, animation, secondaryAnimation) => const EssayPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+      return SlideTransition(
+        position: animation.drive(_tween),
+        child: child,
+      );
+    }
+  );
+}
+
+Route ProfileRoute() {
+  return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 800),
+      pageBuilder: (context, animation, secondaryAnimation) => const ProfilePage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+        return SlideTransition(
+          position: animation.drive(_tween),
+          child: child,
+        );
+      }
+  );
+}
+
+
 
 
 

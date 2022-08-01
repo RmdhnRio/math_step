@@ -26,21 +26,21 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const MateriPage(),
+      home: const EssayPage(),
     );
   }
 }
 
 
-class MateriPage extends StatefulWidget {
-  const MateriPage({Key? key }) : super(key: key);
+class EssayPage extends StatefulWidget {
+  const EssayPage({Key? key }) : super(key: key);
 
 
   @override
-  State<MateriPage> createState() => _MateriPageState();
+  State<EssayPage> createState() => _EssayPageState();
 }
 
-class _MateriPageState extends State<MateriPage> {
+class _EssayPageState extends State<EssayPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _MateriPageState extends State<MateriPage> {
     // than having to individually change instances of widgets.
 
     final pdfController = PdfController(
-      document: PdfDocument.openAsset('assets/documents/materi_satuan_volume.pdf'),
+      document: PdfDocument.openAsset('assets/documents/mari_mencoba.pdf'),
 
 
     );
@@ -100,7 +100,7 @@ class _MateriPageState extends State<MateriPage> {
                 Container(
                   alignment: Alignment.topCenter,
                   margin: const EdgeInsets.only(top: 40),
-                  child: Text(style: style.title, 'Materi Satuan Volume'),
+                  child: Text(style: style.title, 'Mari Mencoba'),
                 ),
               ],
             ),
@@ -121,8 +121,8 @@ class _MateriPageState extends State<MateriPage> {
                               height: 244,
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
-                                    color: const Color.fromRGBO(237, 194, 59, 1),
-                                    // borderRadius: BorderRadius.circular(16.0),
+                                  color: const Color.fromRGBO(237, 194, 59, 1),
+                                  // borderRadius: BorderRadius.circular(16.0),
 
                                 ),
                                 child: PdfView(

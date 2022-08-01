@@ -670,7 +670,7 @@ class _QuizStartState extends State<QuizStart> {
 
       // resizeToAvoidBottomInset: false,
      body: Container(
-       margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+       margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
 
        child: Column(
 
@@ -803,7 +803,6 @@ class _QuizStartState extends State<QuizStart> {
            ),
 
            Row(
-
              children: <Widget>[
                Column(
 
@@ -883,7 +882,7 @@ class _QuizStartState extends State<QuizStart> {
                  ],
                ),
                SizedBox(
-                 height: 250,
+                 height: 270,
                  width: 538,
                  child: PageView.builder(
                    itemCount: questions.length,
@@ -942,7 +941,7 @@ class _QuizStartState extends State<QuizStart> {
     return Column(
       children: <Widget>[
         Container(
-          height: 30,
+          height: 50,
           margin: const EdgeInsets.only(bottom: 10),
           child: Text(textAlign: TextAlign.center, style:style.quizText, question.text),
         ),

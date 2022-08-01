@@ -8,10 +8,10 @@ const Color _primaryColor = Color.fromRGBO(0, 59, 105, 1);
 const Color _yellow = Color.fromRGBO(237, 194, 59, 1);
 
 const TextStyle title = TextStyle(
-  fontSize: 40,
+  fontSize: 45,
   fontFamily: _titleFont,
-  color: _primaryColor
-
+  color: _primaryColor,
+  height: 1,
 );
 
 
@@ -46,7 +46,7 @@ const TextStyle quizCapt = TextStyle(
 );
 
 const TextStyle quizText = TextStyle(
-  fontSize: 18,
+  fontSize: 12,
   fontFamily: _primaryFont,
   color: _primaryColor,
   fontWeight: FontWeight.bold,

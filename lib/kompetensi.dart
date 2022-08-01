@@ -141,7 +141,7 @@ class _KompetensiPageState extends State<KompetensiPage> {
                               height: 165,
                               width: 200,
                               alignment: Alignment.center,
-                              child: Text(textAlign: TextAlign.center,style: style.menuText,'Kompetensi'), ),
+                              child: Text(textAlign: TextAlign.center,style: style.menuText,'KI, KD dan Indikator'), ),
                           ),
                           ElevatedButton(
                             onPressed: () {
@@ -256,7 +256,7 @@ class _KompetensiDasar extends State<KompetensiDasar>{
     double _screenHeight = MediaQuery.of(context).size.height;
 
     final pdfController = PdfController(
-      document: PdfDocument.openAsset('assets/documents/contoh_slide.pdf'),
+      document: PdfDocument.openAsset('assets/documents/kompetensi_dasar.pdf'),
 
 
     );
@@ -424,7 +424,7 @@ class _TujuanPembelajaran extends State<TujuanPembelajaran>{
     double _screenHeight = MediaQuery.of(context).size.height;
 
     final pdfController = PdfController(
-      document: PdfDocument.openAsset('assets/documents/contoh_slide.pdf'),
+      document: PdfDocument.openAsset('assets/documents/kompetensi_dasar.pdf'),
 
 
     );
