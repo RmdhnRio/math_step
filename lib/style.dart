@@ -59,7 +59,7 @@ const TextStyle tp = TextStyle(
 );
 
 const TextStyle dp = TextStyle(
-  fontSize: 19,
+  fontSize: 16,
   fontFamily: _primaryFont,
   color: _primaryColor
 );

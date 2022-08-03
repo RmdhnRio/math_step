@@ -318,7 +318,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             width: 360,
                             alignment: Alignment.centerLeft,
                             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                            child:  Expanded(
+                            child:  Container(
                               child: RichText(
                                 text: TextSpan(
                                 style: style.caption,
@@ -341,7 +341,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Container(
                       alignment: Alignment.bottomCenter,
-                      margin: const EdgeInsets.only(top: 200),
+                      margin: const EdgeInsets.only(top: 210),
                       padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -486,6 +486,14 @@ class _DaftarPustakaState extends State<DaftarPustaka> {
                         children: <Widget>[
                           Text(
                             style: style.dp,
+                            '\n● Pronomosidi dkk. 2018. Buku Siswa Senang Belajar Matematika SD/MI Kelas V. Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud.'
+                          ),
+                          Text(
+                            style: style.dp,
+                            '● Pronomosidi dkk. 2018. Buku Guru Senang Belajar Matematika SD/MI Kelas V. Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud.'
+                          ),
+                          Text(
+                            style: style.dp,
                               '● https://ruangguru.co/satuan-volume/'
                           ),
                           Text(
@@ -500,14 +508,6 @@ class _DaftarPustakaState extends State<DaftarPustaka> {
                               style: style.dp,
                               '● https://www.belajarmtk.com/satuan-volume-dan-contoh-soalnya/'
                           ),
-                          Text(
-                              style: style.dp,
-                              '● Pronomosidi dkk. 2018. Buku Siswa Senang Belajar Matematika SD/MI Kelas V. Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud.'
-                          ),
-
-
-
-
                         ],
                       ),
                     ),

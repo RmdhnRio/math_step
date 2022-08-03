@@ -105,7 +105,7 @@ class _KompetensiPageState extends State<KompetensiPage> {
                 Container(
                   alignment: Alignment.topCenter,
                   margin: EdgeInsets.only(top: 40),
-                  child: Text(style: style.title, 'Pilih Menu'),
+                  // child: Text(style: style.title, 'Pilih Menu'),
                 ),
               ],
             ),

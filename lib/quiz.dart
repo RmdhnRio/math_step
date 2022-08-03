@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quiz',
-      theme: ThemeData(
 
+      theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
@@ -87,10 +87,8 @@ class _QuizIntroState extends State<QuizIntro> {
   @override
   void initState() {
     super.initState();
-
-
     setAudio();
-    // _isVolumeUp = true;
+    _isVolumeUp = true;
 
     // audioPlayer.onPlayerStateChanged.listen((state) {
     //   setState(() {
@@ -1213,7 +1211,7 @@ class OptionsWidget extends StatelessWidget {
     if (question.isLocked) {
       if (isSelected) {
         return option.isCorrect ? Colors.greenAccent
-            : Colors.red;
+            : Colors.redAccent;
       } else if (option.isCorrect) {
         return Colors.greenAccent;
       }
@@ -1221,3 +1219,4 @@ class OptionsWidget extends StatelessWidget {
     return const Color.fromRGBO(156, 180, 236, 1);
   }
 }
+

@@ -6,6 +6,7 @@ import 'materi.dart';
 import 'kompetensi.dart';
 import 'quiz.dart';
 import 'tentang.dart';
+import 'tutorial.dart';
 import 'video.dart';
 
 // general animation config
@@ -176,6 +177,48 @@ Route DaftarPustakaRoute() {
   return PageRouteBuilder(
       transitionDuration: const Duration(milliseconds: 800),
       pageBuilder: (context, animation, secondaryAnimation) => const DaftarPustaka(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+        return SlideTransition(
+          position: animation.drive(_tween),
+          child: child,
+        );
+      }
+  );
+}
+
+Route TutorialRoute(){
+  return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 800),
+      pageBuilder: (context, animation, secondaryAnimation) => const TutorialPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+        return SlideTransition(
+          position: animation.drive(_tween),
+          child: child,
+        );
+      }
+  );
+}
+
+Route ReadingTutorialRoute(){
+  return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 800),
+      pageBuilder: (context, animation, secondaryAnimation) => const ReadingTutorial(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+        return SlideTransition(
+          position: animation.drive(_tween),
+          child: child,
+        );
+      }
+  );
+}
+
+Route QuizTutorialRoute(){
+  return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 800),
+      pageBuilder: (context, animation, secondaryAnimation) => const QuizTutorial(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
 
         return SlideTransition(

@@ -8,12 +8,17 @@ import 'materi.dart' as mat;
 import 'video.dart' as vid;
 import 'quiz.dart' as quiz;
 import 'routes.dart' as route;
-
+import 'package:audioplayers/audioplayers.dart';
 
 
 void main() {
   runApp(const MyApp());
 }
+
+bool _isVolumeUp  = true;
+final audioPlayer = AudioPlayer();
+Duration duration = Duration.zero;
+Duration position = Duration.zero;
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,6 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Main',
       theme: ThemeData(
+
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
@@ -50,6 +56,43 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  Future setAudio() async {
+    audioPlayer.setReleaseMode(ReleaseMode.loop);
+    audioPlayer.setSource(AssetSource('audio/main_bgm.mp3'));
+    audioPlayer.setVolume(2.0);
+    audioPlayer.resume();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    setAudio();
+    _isVolumeUp = true;
+
+    // audioPlayer.onPlayerStateChanged.listen((state) {
+    //   setState(() {
+    //     _isVolumeUp = state == PlayerState.playing;
+    //   });
+    // });
+
+    audioPlayer.onDurationChanged.listen((newDuraion) {
+      if(mounted) {
+        setState(() {
+          duration = newDuraion;
+        });
+      }
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +147,52 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ),
             Text(textAlign: TextAlign.center,style: style.title, 'Media Pembelajaran \n Interaktif'),
+            Container(
+              alignment: Alignment.bottomLeft,
+              padding: const EdgeInsets.fromLTRB(25, 120, 25, 0),
+              child: ElevatedButton(
+
+                onPressed: () async {
+                  if(_isVolumeUp) {
+                    await audioPlayer.pause();
+                    if(mounted) {
+                      setState(() {
+                        _isVolumeUp = false;
+                      });
+                    }
+                  } else {
+                    await audioPlayer.resume();
+                    if(mounted) {
+                      setState(() {
+                        _isVolumeUp = true;
+                      });
+                    }
+                  }
+
+                },
+                style:
+                ElevatedButton.styleFrom(
+                  elevation: 3.0,
+                  shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(16.0) ),
+                  // Foreground color
+
+                  onPrimary: Theme.of(context).colorScheme.onPrimary,
+                  // Background color
+                  primary: const Color.fromRGBO(156, 180, 236, 1),
+                ),
+
+                child:
+                Container(
+                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                    height: 60,
+                    width: 20,
+                    alignment: Alignment.center,
+                    child: _isVolumeUp?
+                    const Icon(Icons.volume_up, size: 18,) : const Icon(Icons.volume_off, size: 18,)
+
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
                 child:
@@ -144,6 +233,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class _MainMenu extends State<MainMenu> {
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -220,10 +311,10 @@ class _MainMenu extends State<MainMenu> {
                       // SizedBox(width: 45,),
                       ElevatedButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => const MainMenu()),
-                          // );
+                          Navigator.push(
+                            context,
+                            route.TutorialRoute(),
+                          );
                         },
                         style:
                         ElevatedButton.styleFrom(
@@ -327,9 +418,11 @@ class _MainMenu extends State<MainMenu> {
                         children: <Widget>[
                           ElevatedButton(
                             onPressed: () {
+                              audioPlayer.dispose();
                               Navigator.push(
                                 context,
                                 route.quizRoute(),
+
                               );
                             },
                             style:
