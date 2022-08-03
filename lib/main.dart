@@ -300,7 +300,6 @@ class _MainMenu extends State<MainMenu> {
             ),
 
             Column(
-
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: 30),
