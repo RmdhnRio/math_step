@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:math_step/style.dart' as style;
+import 'package:url_launcher/url_launcher.dart';
 import 'main.dart' as m;
 import 'routes.dart' as route;
 // import 'package:url_launcher/url_launcher.dart';
@@ -494,19 +495,19 @@ class _DaftarPustakaState extends State<DaftarPustaka> {
                           ),
                           Text(
                             style: style.dp,
-                              '● https://ruangguru.co/satuan-volume/'
+                            '● https://ruangguru.co/satuan-volume/',
                           ),
                           Text(
-                              style: style.dp,
-                              '● https://quipper.co.id/satuan-volume/'
+                            style: style.dp,
+                            '● https://quipper.co.id/satuan-volume/',
                           ),
                           Text(
-                              style: style.dp,
-                              '● https://quipper.co.id/1-kg-berapa-liter/'
+                            style: style.dp,
+                            '● https://quipper.co.id/1-kg-berapa-liter/',
                           ),
                           Text(
-                              style: style.dp,
-                              '● https://www.belajarmtk.com/satuan-volume-dan-contoh-soalnya/'
+                            style: style.dp,
+                            '● https://www.belajarmtk.com/satuan-volume-dan-contoh-soalnya/',
                           ),
                         ],
                       ),
@@ -582,12 +583,39 @@ class _DaftarPustakaState extends State<DaftarPustaka> {
   }
 }
 
-// _launchURL1() async {
-//   final Uri url = Uri.parse('https://ruangguru.co/satuan-volume/');
-//   if (await canLaunchUrl(url)) {
-//     await launchUrl(url);
-//   } else {
-//     throw 'Could not launch $url';
-//   }
-// }
+_launchURL1() async {
+  final Uri url = Uri.parse('https://ruangguru.co/satuan-volume/');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL2() async {
+  final Uri url = Uri.parse('https://quipper.co.id/satuan-volume/');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL3() async {
+  final Uri url = Uri.parse('https://quipper.co.id/1-kg-berapa-liter/');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL4() async {
+  final Uri url = Uri.parse('https://quipper.co.id/1-kg-berapa-liter/');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
